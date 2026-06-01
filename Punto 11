@@ -1,0 +1,20 @@
+11. Realice un circuito de un led y un botón pulsador, el cual mediante
+programación deberá generar enclavamiento, dando como resultado que el
+led quede encendido u apagado si el botón vuelve a presionarse.
+R: nt led = 7;
+int boton = 8;
+bool estadoLed = false;
+bool estadoAnterior = LOW;
+void setup() {
+pinMode(led, OUTPUT);
+pinMode(boton, INPUT_PULLUP);
+}
+void loop() {
+bool estadoActual = digitalRead(boton);
+if (estadoAnterior == HIGH && estadoActual == LOW) { // Detecta flanco de bajada (presionar botón)
+estadoLed = !estadoLed; // Cambia el estado del LED
+digitalWrite(led, estadoLed ? HIGH : LOW);
+delay(50); // Anti-rebote simple
+}
+estadoAnterior = estadoActual;
+}
