@@ -1,0 +1,19 @@
+9. Realice un circuito con 7 led los cuales encenderán de forma secuencial de
+izquierda a derecha y viceversa. El código no puede abarcar más de 15 líneas
+de código.
+R: int leds[] = {2,3,4,5,6,7,8};
+void setup(){
+  for(int i=0;i<7;i++) pinMode(leds[i],OUTPUT);
+}
+void loop(){
+  for(int i=0;i<7;i++){ 
+    digitalWrite(leds[i], HIGH); 
+    delay(200); 
+    digitalWrite(leds[i], LOW);
+  }
+  for(int i=5;i>0;i--){ 
+    digitalWrite(leds[i], HIGH); 
+    delay(200); 
+    digitalWrite(leds[i], LOW);
+  }
+}
