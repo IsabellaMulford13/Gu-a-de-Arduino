@@ -1,0 +1,14 @@
+5. Mediante un led, desarrolla una lectura PWM análoga la cual permita que este
+led cambie su intensidad tres veces en un periodo de tiempo.
+R: int led = 8;
+void setup() {
+pinMode(led, OUTPUT);
+}
+void loop() {
+analogWrite(led, 85); // Baja intensidad
+delay(1000);
+analogWrite(led, 170); // Media intensidad
+delay(1000);
+analogWrite(led, 255); // Alta intensidad
+delay(1000);
+}
