@@ -1,0 +1,12 @@
+15. Utilizando un sensor HC-sr04 programe un pin que permita medir la distancia,
+esta medida debe visualizarse mediante puerto serial. Al realizar dicha
+medición realice la siguiente tabla.
+R: Tiempo de ping (μs)
+	Distancia medida (mm)
+200	34
+300	51
+400	85
+500	102
+600	119
+700	136
+800	156
