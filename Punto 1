@@ -1,6 +1,6 @@
 1. Realiza un código en Arduino que permita a un led encender y apagar varias
 veces, utilizando un pin diferente al 13.
-R: int led = 8;
+R: int led = 10;
 void setup() {
 pinMode(led, OUTPUT);
 }
