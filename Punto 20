@@ -1,0 +1,26 @@
+20. Realice una alarma la con Arduino la cual detecte el metano en el ambiente
+y al pasar el umbral calculado por usted, active un buzzer. (el speaker puede ser
+Activo o negativo según usted decida).
+const int sensorMQ4 = A0;   // Pin de entrada del sensor MQ-4
+const int buzzer = 8;       // Pin del buzzer activo
+const int umbral = 350;     // Nivel umbral de metano
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(buzzer, OUTPUT);
+  digitalWrite(buzzer, LOW);
+}
+
+void loop() {
+  int valorGas = analogRead(sensorMQ4);
+  Serial.print("Gas metano: ");
+  Serial.println(valorGas);
+
+  if (valorGas > umbral) {
+    digitalWrite(buzzer, HIGH); // Activa la alarma
+  } else {
+    digitalWrite(buzzer, LOW);  // Apaga la alarma
+  }
+
+  delay(500);
+}
