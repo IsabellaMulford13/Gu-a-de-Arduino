@@ -1,0 +1,64 @@
+23.utilice un sensor HC-sr04 y dos motores DC realice un montaje de un carrito el
+cual al detectar distancia avance y al no ubicar obstáculos o guia gire suavemente
+hasta hallar dicho elemento.
+#define TRIG 9
+#define ECHO 10
+#define IN1 2
+#define IN2 3
+#define IN3 4
+#define IN4 5
+#define ENA 6
+#define ENB 7
+long duracion;
+float distancia;
+void setup() {
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  pinMode(ENA, OUTPUT);
+  pinMode(ENB, OUTPUT);
+  Serial.begin(9600);
+}
+void loop() {
+  distancia = medirDistancia();
+  Serial.print("Distancia: ");
+  Serial.println(distancia);
+  if (distancia > 5 && distancia < 100) {
+    avanzar();
+  }
+  else {
+    buscarObjeto();
+  }
+  delay(100);
+}
+float medirDistancia() {
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+  duracion = pulseIn(ECHO, HIGH);
+  return duracion * 0.034 / 2;
+}
+void avanzar() {
+  analogWrite(ENA, 180);
+  analogWrite(ENB, 180);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+}
+void buscarObjeto() {
+  // Giro suave
+  analogWrite(ENA, 120);
+  analogWrite(ENB, 120);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+}
+
