@@ -1,0 +1,16 @@
+7. Por medio de la placa Arduino realice la lectura de un potenciómetro y
+compruebe su lectura en el puerto serial, así como utilizando el calculo
+necesario que compruebe la lectura.
+R: int pot = A0;
+void setup() {
+Serial.begin(9600);
+}
+void loop() {
+int valor = analogRead(pot);
+float voltaje = valor * (5.0 / 1023.0);
+Serial.print("Valor: ");
+Serial.print(valor);
+Serial.print(" Voltaje: ");
+Serial.println(voltaje);
+delay(500);
+}
