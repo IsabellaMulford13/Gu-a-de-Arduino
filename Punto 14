@@ -1,0 +1,23 @@
+14. Teniendo en cuenta un joystick cambie la velocidad de un motor DC de forma ascendente o
+descendente según sea oprimido el joystick.
+const int joystickPin = A0;   
+const int motorPin = 9;       
+
+void setup() {
+  pinMode(motorPin, OUTPUT);
+  Serial.begin(9600);         
+}
+
+void loop() {
+  int joystickValue = analogRead(joystickPin);  
+  int motorSpeed = map(joystickValue, 0, 1023, 0, 255);  
+
+  analogWrite(motorPin, motorSpeed);  
+
+  Serial.print("Joystick Value: ");
+  Serial.print(joystickValue);
+  Serial.print("\tMotor Speed (PWM): ");
+  Serial.println(motorSpeed);
+
+  delay(100);  
+}
