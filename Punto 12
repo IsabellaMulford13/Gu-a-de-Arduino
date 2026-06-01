@@ -1,0 +1,18 @@
+12. Utilizando una LDR genere el efecto de cambio de dirección en un servomotor,
+para mostrar en qué fase del día se encuentra.
+R: #include <Servo.h>
+Servo servo;
+int ldrPin = A0;
+int valorLDR;
+void setup() {
+servo.attach(9);
+Serial.begin(9600);
+}
+void loop() {
+valorLDR = analogRead(ldrPin);
+Serial.println(valorLDR);
+// Mapear valor LDR a ángulo de servo (0° a 180°)
+int angulo = map(valorLDR, 0, 1023, 0, 180);
+servo.write(angulo);
+delay(500);
+}
