@@ -1,0 +1,24 @@
+16. Utilice una LCD 16x2 para escribir su nombre en la fila superior
+Posteriormente anime su nombre completo para que recorra de izquierda a
+derecha.
+#include <LiquidCrystal.h>
+int rs=12;
+int e=11;
+int d4= 5;
+int d5= 4;
+int d6= 3;
+int d7= 2;
+int numero= 0;
+
+LiquidCrystal lcd(rs,e,d4,d5,d6,d7);
+
+void setup() {
+  lcd.begin(16,2);
+}
+
+void loop() {
+ lcd.setCursor(2,0);
+  lcd.print("          Isabella Ramirez");
+  lcd.scrollDisplayLeft();
+  delay(1000);
+}
