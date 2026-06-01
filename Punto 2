@@ -1,0 +1,11 @@
+2. Realice un programa en Arduino el cual permita encender 3 led al mismo
+tiempo sin parpadear.
+R: nt led1 = 3, led2 = 4, led3 = 5;
+void setup() {
+pinMode(led3, OUTPUT);
+pinMode(led4, OUTPUT);
+pinMode(led5, OUTPUT);
+digitalWrite(led3, HIGH);
+digitalWrite(led4, HIGH);
+digitalWrite(led5, HIGH);
+}
