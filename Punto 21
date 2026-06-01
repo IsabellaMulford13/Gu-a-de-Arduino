@@ -1,0 +1,91 @@
+21. Utilice un sensor PIR el cual utilizando un flanco asendente de 2 minutos active
+un bombillo de 120V y visualice por medio de una pantalla oled la animación de
+encendido del bombillo.
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
+
+const int pirPin = 2;
+const int relePin = 8;
+
+bool estadoAnterior = LOW;
+bool temporizadorActivo = false;
+
+unsigned long tiempoInicio = 0;
+const unsigned long tiempoEncendido = 120000; // 2 minutos
+
+void setup() {
+  pinMode(pirPin, INPUT);
+  pinMode(relePin, OUTPUT);
+
+  digitalWrite(relePin, LOW);
+
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  display.clearDisplay();
+  display.display();
+}
+
+void loop() {
+
+  bool estadoActual = digitalRead(pirPin);
+
+  // Detección de flanco ascendente
+  if (estadoActual == HIGH && estadoAnterior == LOW) {
+    digitalWrite(relePin, HIGH);
+    tiempoInicio = millis();
+    temporizadorActivo = true;
+  }
+
+  estadoAnterior = estadoActual;
+
+  if (temporizadorActivo) {
+
+    // Animación OLED
+    mostrarAnimacion();
+
+    if (millis() - tiempoInicio >= tiempoEncendido) {
+      digitalWrite(relePin, LOW);
+      temporizadorActivo = false;
+
+      display.clearDisplay();
+      display.setTextSize(2);
+      display.setTextColor(WHITE);
+      display.setCursor(10, 25);
+      display.println("APAGADO");
+      display.display();
+    }
+  }
+}
+
+void mostrarAnimacion() {
+
+  static int radio = 5;
+  static bool crecer = true;
+
+  display.clearDisplay();
+
+  display.drawCircle(64, 25, radio, WHITE);
+  display.fillCircle(64, 25, radio-2, WHITE);
+
+  display.setTextSize(1);
+  display.setTextColor(WHITE);
+  display.setCursor(30, 50);
+  display.println("Bombillo ON");
+
+  display.display();
+
+  if (crecer) {
+    radio++;
+    if (radio >= 15) crecer = false;
+  } else {
+    radio--;
+    if (radio <= 5) crecer = true;
+  }
+
+  delay(50);
+}
