@@ -1,0 +1,12 @@
+6. Realiza un divisor de tensión y mediante la placa Arduino realiza la lectura de
+este circuito y muestra los datos mediante el monitor serial.
+R: int pin = A0;
+void setup() {
+Serial.begin(9600);
+}
+void loop() {
+int valor = analogRead(pin);
+float voltaje = valor * (5.0 / 1023.0);
+Serial.println(voltaje);
+delay(500);
+}
