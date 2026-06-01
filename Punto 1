@@ -1,0 +1,11 @@
+1. Realiza un código en Arduino que permita a un led encender y apagar varias
+veces, utilizando un pin diferente al 13.
+R: int led = 8;
+void setup() {
+pinMode(led, OUTPUT);
+}
+void loop() {
+digitalWrite(led, HIGH);
+delay(500);
+digitalWrite(led, LOW);
+delay(500);
