@@ -1,0 +1,17 @@
+8. Desarrolla un circuito con un potenciómetro y un led el cual si la lectura
+realizada al potenciómetro es mayor a 4 el led deberá encender, si no este
+deberá permanecer apagado.
+R: int pot = A0;
+int led = 6;
+void setup() {
+  pinMode(led, OUTPUT);
+}
+void loop() {
+  int valor = analogRead(pot);
+  float voltaje = valor * (5.0 / 1023.0);
+  if (voltaje > 4.0) {
+    digitalWrite(led, HIGH);
+  } else {
+    digitalWrite(led, LOW);
+  }
+}
