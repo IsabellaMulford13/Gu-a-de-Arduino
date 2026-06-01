@@ -1,0 +1,17 @@
+13. Utilizando un motor DC, realice la variación de su velocidad utilizando PWM.
+R: nt motorPin = 9; // Pin PWM
+void setup() {  
+pinMode(motorPin, OUTPUT);
+}
+void loop() {
+// Aumentar velocidad gradualmente
+for (int velocidad = 0; velocidad <= 255; velocidad += 5) {
+analogWrite(motorPin, velocidad);
+delay(50);
+}
+// Disminuir velocidad gradualmente
+for (int velocidad = 255; velocidad >= 0; velocidad -= 5) {
+analogWrite(motorPin, velocidad);
+delay(50);
+}
+}
